@@ -1,15 +1,16 @@
 Summary:	ftpproxy is an application level gateway for the FTP protocol
 Summary(pl):	ftpproxy jest aplikacyjn± bramk± dla protoko³u FTP
 Name:		ftpproxy
-Version:	1.1.5
+Version:	1.2.3
 Release:	1
 License:	GPL
 Group:		Applications/Networking
 Source0:	http://ftp.daemons.de/download/%{name}-%{version}.tgz
-#Source0-md5:	4db5116f29e0477fa35f4c563e5aa2ad
+# Source0-md5:	c2068bc452e1d7554d3bda08030aa433
 Source1:	%{name}.inetd
 Prereq:		rc-inetd >= 0.8.1
 URL:		http://ftp.daemons.de/
+BuildRequires:	ctags
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Conflicts:	proxytools
 
@@ -32,7 +33,7 @@ serwerami FTP.
 %build
 %{__make} \
 	CC=%{__cc} \
-	CFLAGS="%{rpmcflags}"
+	CFLAGS="%{rpmcflags} -DVERSION=\\\"%{version}\\\""
 
 %install
 rm -rf $RPM_BUILD_ROOT
