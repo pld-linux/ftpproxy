@@ -1,0 +1,9 @@
+SERVICE_NAME=ftpproxy
+SOCK_TYPE=stream
+PROTOCOL=tcp
+PORT=10021
+FLAGS=nowait
+USER=nobody
+SERVER=tcpd
+DAEMON=/usr/sbin/ftp.proxy
+DAEMONARGS="-p 10020 -t 30"
