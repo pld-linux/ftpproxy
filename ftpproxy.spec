@@ -1,11 +1,12 @@
 Summary:	ftpproxy is an application level gateway for the FTP protocol
 Summary(pl):	ftpproxy jest aplikacyjn± bramk± dla protoko³u FTP
 Name:		ftpproxy
-Version:	1.1.3
+Version:	1.1.5
 Release:	1
 License:	GPL
 Group:		Applications/Networking
 Source0:	http://ftp.daemons.de/download/%{name}-%{version}.tgz
+#Source0-md5:	4db5116f29e0477fa35f4c563e5aa2ad
 Source1:	%{name}.inetd
 Prereq:		rc-inetd >= 0.8.1
 URL:		http://ftp.daemons.de/
@@ -37,8 +38,8 @@ serwerami FTP.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man1,/etc/sysconfig/rc-inetd}
 
-install ftp.proxy $RPM_BUILD_ROOT%{_sbindir}
-install ftp.proxy.1 $RPM_BUILD_ROOT%{_mandir}/man1
+install src/ftp.proxy $RPM_BUILD_ROOT%{_sbindir}
+install doc/ftp.proxy.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ftpproxy
 
@@ -59,7 +60,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc rfc959 HISTORY INSTALL
+%doc doc/rfc*.txt HISTORY INSTALL
 %attr(640,root,root) %config %verify(not size mtime md5) /etc/sysconfig/rc-inetd/ftpproxy
 %attr(755,root,root) %{_sbindir}/ftp.proxy
 %{_mandir}/man1/*
