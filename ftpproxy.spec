@@ -12,6 +12,7 @@ Source1:	%{name}.inetd
 Prereq:		rc-inetd >= 0.8.1
 URL:		http://ftp.daemons.de/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Conflicts:	proxytools
 
 %description
 ftp.proxy is a proxy server for a subset of the file transfer
@@ -22,9 +23,9 @@ client.
 
 %description -l pl
 ftp.proxy jest aplikacyjn± bramk± dla podzbioru protoko³u FTP
-opisanego w RFC 959. Posredniczy w transferze pomiêdzy klientem a
-serverem bez specjalnego patrzenia czy oba hosty s± prawdziwymi
-serverami FTP.
+opisanego w RFC 959. Po¶redniczy w transferze pomiêdzy klientem a
+serwerem bez specjalnego patrzenia czy oba hosty s± prawdziwymi
+serwerami FTP.
 
 %prep
 %setup -q
