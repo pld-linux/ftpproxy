@@ -2,7 +2,7 @@ Summary:	ftpproxy is an application level gateway for the FTP protocol
 Summary(pl):	ftpproxy jest aplikacyjn± bramk± dla protoko³u FTP
 Name:		ftpproxy
 Version:	1.1.2
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Networking
 Group(de):	Applikationen/Netzwerkwesen
@@ -10,6 +10,7 @@ Group(pl):	Aplikacje/Sieciowe
 Source0:	http://ftp.daemons.de/download/%{name}-%{version}.tgz
 Source1:	%{name}.inetd
 Prereq:		rc-inetd >= 0.8.1
+URL:		http://ftp.daemons.de/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -21,7 +22,9 @@ client.
 
 %description -l pl
 ftp.proxy jest aplikacyjn± bramk± dla podzbioru protoko³u FTP
-opisanego w RFC 959.
+opisanego w RFC 959. Posredniczy w transferze pomiêdzy klientem a
+serverem bez specjalnego patrzenia czy oba hosty s± prawdziwymi
+serverami FTP.
 
 %prep
 %setup -q
@@ -59,7 +62,7 @@ fi
     
 %files
 %defattr(644,root,root,755)
-%doc *gz
+%doc *.gz
 %attr(755,root,root) %{_sbindir}/ftp.proxy
 %{_mandir}/man1/*
 %attr(640,root,root) %config %verify(not size mtime md5) /etc/sysconfig/rc-inetd/ftpproxy
