@@ -9,17 +9,19 @@ Group(de):	Applikationen/Netzwerkwesen
 Group(pl):	Aplikacje/Sieciowe
 Source0:	http://ftp.daemons.de/download/%{name}-%{version}.tgz
 Source1:	%{name}.inetd
+Prereq:		rc-inetd >= 0.8.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-ftp.proxy is a proxy server for a subset of the file tran­ fer
+ftp.proxy is a proxy server for a subset of the file transfer
 protocol described in RFC 959. It forwards traffic between a client
 and a server without looking too much if both hosts do real FTP. The
 FTP server can be either given on the command line or supplied by the
 client.
 
 %description -l pl
-ftp.proxy jest aplikacyjn± bramk± dla protoko³u FTP.
+ftp.proxy jest aplikacyjn± bramk± dla podzbioru protoko³u FTP
+opisanego w RFC 959.
 
 %prep
 %setup -q
@@ -31,14 +33,17 @@ ftp.proxy jest aplikacyjn± bramk± dla protoko³u FTP.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man1}
+install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man1,/etc/sysconfig/rc-inetd}
 
-install ftp.proxy $RPM_BUILD_ROOT%{_sbindir}/
-install ftp.proxy.1 $RPM_BUILD_ROOT%{_mandir}/man1/
+install ftp.proxy $RPM_BUILD_ROOT%{_sbindir}
+install ftp.proxy.1 $RPM_BUILD_ROOT%{_mandir}/man1
+
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ftpproxy
 
 gzip -9nf  rfc959 HISTORY INSTALL
-install -d $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ftpproxy
+
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %post
 if [ -f /var/lock/subsys/rc-inetd ]; then
@@ -52,9 +57,6 @@ if [ "$1" = "0" -a -f /var/lock/subsys/rc-inetd ]; then
     /etc/rc.d/init.d/rc-inetd reload
 fi
 	    
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
 %defattr(644,root,root,755)
 %doc *gz
