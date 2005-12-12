@@ -8,7 +8,7 @@ Group:		Applications/Networking
 Source0:	http://ftp.daemons.de/download/%{name}-%{version}.tgz
 # Source0-md5:	c2068bc452e1d7554d3bda08030aa433
 Source1:	%{name}.inetd
-Prereq:		rc-inetd >= 0.8.1
+Requires:	rc-inetd >= 0.8.1
 URL:		http://ftp.daemons.de/
 BuildRequires:	ctags
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -32,7 +32,7 @@ serwerami FTP.
 
 %build
 %{__make} \
-	CC=%{__cc} \
+	CC="%{__cc}" \
 	CFLAGS="%{rpmcflags} -DVERSION=\\\"%{version}\\\""
 
 %install
@@ -62,6 +62,6 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc doc/rfc*.txt HISTORY INSTALL
-%attr(640,root,root) %config %verify(not size mtime md5) /etc/sysconfig/rc-inetd/ftpproxy
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/ftpproxy
 %attr(755,root,root) %{_sbindir}/ftp.proxy
 %{_mandir}/man1/*
