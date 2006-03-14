@@ -8,11 +8,12 @@ Group:		Applications/Networking
 Source0:	http://ftp.daemons.de/download/%{name}-%{version}.tgz
 # Source0-md5:	c2068bc452e1d7554d3bda08030aa433
 Source1:	%{name}.inetd
-Requires:	rc-inetd >= 0.8.1
 URL:		http://ftp.daemons.de/
 BuildRequires:	ctags
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRequires:	rpmbuild(macros) >= 1.268
+Requires:	rc-inetd >= 0.8.1
 Conflicts:	proxytools
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 ftp.proxy is a proxy server for a subset of the file transfer protocol
@@ -48,15 +49,11 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ftpproxy
 rm -rf $RPM_BUILD_ROOT
 
 %post
-if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd reload 1>&2
-else
-	echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet server" 1>&2
-fi
+%service -q rc-inetd reload
 
 %postun
-if [ "$1" = "0" -a -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd reload
+if [ "$1" = "0" ]; then
+	%service -q rc-inetd reload
 fi
 
 %files
