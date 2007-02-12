@@ -1,5 +1,5 @@
 Summary:	ftpproxy is an application level gateway for the FTP protocol
-Summary(pl):	ftpproxy jest aplikacyjn± bramk± dla protoko³u FTP
+Summary(pl.UTF-8):   ftpproxy jest aplikacyjnÄ… bramkÄ… dla protokoÅ‚u FTP
 Name:		ftpproxy
 Version:	1.2.3
 Release:	1
@@ -22,10 +22,10 @@ server without looking too much if both hosts do real FTP. The FTP
 server can be either given on the command line or supplied by the
 client.
 
-%description -l pl
-ftp.proxy jest aplikacyjn± bramk± dla podzbioru protoko³u FTP
-opisanego w RFC 959. Po¶redniczy w transferze pomiêdzy klientem a
-serwerem bez specjalnego patrzenia czy oba hosty s± prawdziwymi
+%description -l pl.UTF-8
+ftp.proxy jest aplikacyjnÄ… bramkÄ… dla podzbioru protokoÅ‚u FTP
+opisanego w RFC 959. PoÅ›redniczy w transferze pomiÄ™dzy klientem a
+serwerem bez specjalnego patrzenia czy oba hosty sÄ… prawdziwymi
 serwerami FTP.
 
 %prep
