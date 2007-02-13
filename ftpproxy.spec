@@ -1,5 +1,5 @@
 Summary:	ftpproxy is an application level gateway for the FTP protocol
-Summary(pl.UTF-8):   ftpproxy jest aplikacyjną bramką dla protokołu FTP
+Summary(pl.UTF-8):	ftpproxy jest aplikacyjną bramką dla protokołu FTP
 Name:		ftpproxy
 Version:	1.2.3
 Release:	1
