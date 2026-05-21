@@ -1,0 +1,35 @@
+diff -urN ftpproxy-1.2.3.orig/src/ip-lib.c ftpproxy-1.2.3/src/ip-lib.c
+--- ftpproxy-1.2.3.orig/src/ip-lib.c	2026-05-21 01:36:16.980388238 +0200
++++ ftpproxy-1.2.3/src/ip-lib.c	2026-05-21 01:38:04.126219023 +0200
+@@ -42,8 +42,9 @@
+ #include "ip-lib.h"
+ 
+ 
+-static void alarm_handler()
++static void alarm_handler(int sig)
+ {
++	(void)sig;
+ 	return;
+ }
+ 
+@@ -52,7 +53,7 @@
+ {
+ 	int	socketd;
+ 	struct sockaddr_in server;
+-	struct hostent *hostp, *gethostbyname();
++	struct hostent *hostp;
+ 
+ 	socketd = socket(AF_INET, SOCK_STREAM, 0);
+ 	if (socketd < 0)
+diff -urN ftpproxy-1.2.3.orig/src/Makefile ftpproxy-1.2.3/src/Makefile
+--- ftpproxy-1.2.3.orig/src/Makefile	2026-05-21 01:36:16.980138007 +0200
++++ ftpproxy-1.2.3/src/Makefile	2026-05-21 01:36:20.987413232 +0200
+@@ -18,7 +18,7 @@
+ 	-ctags *.[ch]
+ 
+ ftp.proxy:	$(FTPPROXY)
+-	$(CC) -o $@ $(FTPPROXY) ${OSLIB}
++	$(CC) $(LDFLAGS) -o $@ $(FTPPROXY) ${OSLIB}
+ 
+ 	
+ clean:
